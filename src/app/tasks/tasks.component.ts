@@ -20,10 +20,10 @@ export class TasksComponent implements OnInit, OnChanges {
     @Input({ required: true }) pokemon!: Pokemon;
 
     message: string = '';
-    isAddingTask: boolean = false;
     displayAttack: number = 0;
     displayDefense: number = 0;
 
+    isLoading: boolean = false; 
 
     // Constructor
     constructor(
@@ -32,13 +32,14 @@ export class TasksComponent implements OnInit, OnChanges {
         private pokemonEvolutionService: PokemonEvolutionService,
         private audioService: AudioService,
         private cdr: ChangeDetectorRef
-    ) { }
+    ) {}
 
 
     // ngOnInit
     ngOnInit() {
         this.loadPokemonState();
         this.checkConditions();
+        this.isLoading = false; 
 
         // Call animateStats
         this.pokemonEvolutionService.animateStats(
@@ -109,6 +110,9 @@ export class TasksComponent implements OnInit, OnChanges {
 
     // Load Pokemon State
     loadPokemonState() {
+
+        this.isLoading = true; 
+
         const updatedPokemon = this.pokemonService.loadPokemonState(this.pokemon.id);
         if (updatedPokemon) {
             this.pokemon = { ...updatedPokemon };
@@ -131,6 +135,7 @@ export class TasksComponent implements OnInit, OnChanges {
 
             this.setEvolutionMessage();
         }
+        this.isLoading = false; 
     }
 
 
@@ -146,8 +151,10 @@ export class TasksComponent implements OnInit, OnChanges {
 
     // On Task Completed
     onTaskCompleted(): void {
+        this.pokemonService.isLoading = true;
         this.loadPokemonState();
         this.setEvolutionMessage();
+        this.pokemonService.isLoading = false; 
         this.cdr.detectChanges();
     }
 

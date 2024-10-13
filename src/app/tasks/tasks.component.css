@@ -37,6 +37,18 @@ header {
     box-sizing: border-box;
 }
 
+/* Loading */
+
+.loading-gif {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    max-width: 250px;
+    max-height: 250px;
+}
+
 header .pokemonImage {
     max-width: 190px;
     max-height: 190px;

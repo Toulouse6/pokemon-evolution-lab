@@ -1,15 +1,20 @@
 <div id="tasks" [ngClass]="{ 'fully-evolved-tasks': pokemon.isFullyEvolved }">
     <header>
-        <!-- Pokémon Image -->
+
         <div class="pokemonImage">
-            <img class="pokemonImage" [src]="pokemon.gif" alt="{{ pokemon.name }}'s gif">
+
+            <div class="pokemonImage">
+                <img *ngIf="isLoading" src="./assets/images/evolution-gif2.gif" alt="Loading..." class="loading-gif">
+                <img *ngIf="!isLoading && pokemon.gif" class="pokemonImage" [src]="pokemon.gif"
+                    alt="{{ pokemon.name }}'s gif">
+            </div>
         </div>
 
-        <!-- Pokémon Name & Stage -->
         <div class="pokemonInfo">
             <h2>{{ pokemon.name }}
                 <span class="stage">{{ getCurrentEvolutionStage(pokemon) }}</span>
             </h2>
+
 
             <!-- Actions (Feed, Potion, Moon Stone) -->
             <div class="actions">

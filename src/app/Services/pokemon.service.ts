@@ -11,6 +11,8 @@ import { DUMMY_POKEMONS } from "../dummy-pokemons";
 export class PokemonService {
 
     private pokemons: Pokemon[] = [];
+    public isLoading: boolean = false;
+
 
     // Constructor
     constructor(
@@ -127,6 +129,7 @@ export class PokemonService {
         localStorage.setItem('evolvedPokemonStates', JSON.stringify(savedStates));
     }
 
+    
 
     // Load Pokemon State
     public loadPokemonState(pokemonId: string): Pokemon | undefined {
@@ -140,7 +143,10 @@ export class PokemonService {
         let hasEvolved = false;
         let newAttack = 0;
         let newDefense = 0;
+        this.isLoading = true; 
+
         this.updatePokemon(pokemonId, (pokemon) => {
+            this.isLoading = false;
             let health = pokemon.health ?? 0;
             let happiness = pokemon.happiness ?? 0;
 
@@ -150,6 +156,7 @@ export class PokemonService {
 
             // Evolution state checks
             if (pokemon.isFullyEvolved) {
+                this.isLoading = false;
                 return; // Don't change anything if fully evolved
             }
 
@@ -218,9 +225,13 @@ export class PokemonService {
                 pokemon.evolutionSoundPlayed = true;
 
 
-                // Save Pokémon state
-                this.savePokemons();
-                this.saveSelectedPokemonState(pokemon);
+                // Save Pokémon state & simulate loading time for GIF
+
+                setTimeout(() => {
+                    this.isLoading = false; // Stop loading after updating the GIF
+                    this.savePokemons();
+                    this.saveSelectedPokemonState(pokemon);
+                }, 1000); // Adjust timeout as needed
             }
 
             // Second Stage Evolution (to Third)
@@ -247,9 +258,11 @@ export class PokemonService {
                 pokemon.evolutionSoundPlayed = false;
                 this.audioService.taskCompleteEffect('evolution2.mp3');
 
-                // Save Pokémon state
-                this.savePokemons();
-                this.saveSelectedPokemonState(pokemon);
+                setTimeout(() => {
+                    this.isLoading = false;
+                    this.savePokemons();
+                    this.saveSelectedPokemonState(pokemon);
+                }, 1000);
             }
 
             // Fully evolved state
