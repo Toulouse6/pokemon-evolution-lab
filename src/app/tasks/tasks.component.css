@@ -37,6 +37,9 @@ header {
     box-sizing: border-box;
 }
 
+
+/* Pokemon Gif */
+
 header .pokemonImage {
     max-width: 190px;
     max-height: 190px;
@@ -45,10 +48,6 @@ header .pokemonImage {
     margin: 0 25px 0 0;
     padding-left: 5px;
 }
-
-
-/* Pokemon Gif */
-
 
 h2 {
     font-size: 1.6rem;
