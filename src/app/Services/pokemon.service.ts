@@ -132,7 +132,7 @@ export class PokemonService {
 
 
     // Load Pokemon State
-    public loadPokemonState(pokemonId: string): Pokemon | undefined {
+    loadPokemonState(pokemonId: string): Pokemon | undefined {
         return this.getPokemon(pokemonId);
     }
 

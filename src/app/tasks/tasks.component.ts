@@ -89,7 +89,7 @@ export class TasksComponent implements OnInit, OnChanges {
 
 
     onPokemonImageLoad() {
-        this.isLoading = false;
+        this.isLoading = false;  
         console.log('Pokémon GIF loaded.');
     }
 

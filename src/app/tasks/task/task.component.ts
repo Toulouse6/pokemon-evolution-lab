@@ -20,6 +20,8 @@ export class TaskComponent {
 
     @Output() taskCompleted: EventEmitter<void> = new EventEmitter<void>();
 
+    isLoading = false; 
+
     // Constructor
     constructor(
         private pokemonTasksService: PokemonTaskService,
@@ -29,13 +31,13 @@ export class TaskComponent {
 
     // ngOnInit
     ngOnInit() {
-        this.loadPokemonState();
+        this.onLoadPokemonState();
     }
 
     // ngOnChanges
     ngOnChanges(changes: SimpleChanges) {
         if (changes['pokemon'] && !changes['pokemon'].firstChange) {
-            this.loadPokemonState();
+            this.onLoadPokemonState();
         }
     }
 
@@ -49,15 +51,20 @@ export class TaskComponent {
         this.taskCompleted.emit();
 
         // Load latest Pokémon statE
-        this.loadPokemonState();
+        this.onLoadPokemonState();
         this.cdr.detectChanges();
     }
 
     // Load latest Pokemon state
-    public loadPokemonState() {
-        const updatedPokemon = this.pokemonService.getPokemon(this.pokemon.id);
+    onLoadPokemonState() {
+        this.isLoading = true; // Set loading to true when starting to load
+
+        const updatedPokemon = this.pokemonService.loadPokemonState(this.pokemon.id);
         if (updatedPokemon) {
             this.pokemon = { ...updatedPokemon };
+
+            this.pokemon.gif = updatedPokemon.gif;
+            this.isLoading = false; 
         }
     }
 
