@@ -1,0 +1,141 @@
+body {
+    height: 100%;
+}
+
+main {
+    width: 90%;
+    max-width: 50rem;
+    margin: 1rem auto;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: start;
+}
+
+
+/* Pokemon list */
+
+#pokemons {
+    list-style: none;
+    margin: 50px 0 20px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+    height: 50vh;
+    max-height: 50vh;
+    min-height: 50vh;
+    width: 100%;
+    scroll-behavior: smooth;
+}
+
+
+/* Navigation */
+
+.pokemon-navigation {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 11.5rem;
+    margin-top: -50px;
+    margin-left: -5px;
+}
+
+.pokemon-navigation .selectBtn {
+    background-color: #263248;
+    font-size: 0.6rem;
+    margin: auto 2px 0 4px;
+    cursor: pointer;
+    color: #b3c3d1;
+    padding: 8px 10px;
+    align-items: center;
+}
+
+.pokemon-navigation button:hover,
+.audio:hover {
+    background-color: #405975;
+    color: white;
+}
+
+
+/* Sound button */
+
+.audio {
+    background-color: #263248;
+    color: #b3c3d1;
+    cursor: pointer;
+    width: 100%;
+    padding: 8px 10px;
+    align-items: center;
+    font-size: 0.6rem;
+    margin: auto 12px 0 3px;
+    cursor: pointer;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+
+    main {
+        width: 90%;
+        max-width: 50rem;
+    }
+
+    #pokemons {
+        width: 100%;
+    }
+    
+
+}
+
+
+@media (max-width: 768px) {
+
+    main {
+        margin: -0.5rem auto;
+        grid-template-columns: 1fr;
+        max-width: 37rem;
+        justify-content: center;
+        display: ruby-text;
+        width: 100%;
+    }
+
+    body {
+        justify-content: center;
+        display: grid;
+    }
+
+    #pokemons {
+        padding: 0 10px;
+        max-height: 30vh;
+        width: 100%;
+        min-height: 30vh
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    body {
+        justify-content: center;
+        display: grid;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    #pokemons {
+        width: 100%;
+        max-height: 30vh;
+        min-height: 30vh;
+    }
+
+}

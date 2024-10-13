@@ -1,0 +1,33 @@
+<body>
+    <app-header></app-header>
+
+    <main>
+        <ul id="pokemons">
+
+            <!-- Navigation -->
+            <div class="pokemon-navigation">
+                <button class="selectBtn" (click)="selectPreviousPokemon()">←</button>
+                <button class="selectBtn" (click)="selectNextPokemon()">→</button>
+
+                <!-- Music Button -->
+                <button class="audio" (click)="toggleMusic()">
+                    {{ audioService.isPlaying() ? 'Pause Music' : 'Play Music' }}
+                </button>
+
+            </div>
+
+            <!-- ngFor Pokemons -->
+            <li *ngFor="let pokemon of pokemons; trackBy: trackByPokemonId" [id]="'pokemon-' + pokemon.id"
+                [class.selected]="pokemon.id === selectedPokemonId">
+                <app-pokemon [pokemon]="pokemon" [selected]="pokemon.id === selectedPokemonId"
+                    (select)="onSelectPokemon(pokemon.id, 'sword-sound.mp3')">
+                </app-pokemon>
+            </li>
+        </ul>
+        <!-- Tasks -->
+        <ng-container *ngIf="selectedPokemon">
+            <app-tasks [pokemon]="selectedPokemon"></app-tasks>
+        </ng-container>
+
+    </main>
+</body>
