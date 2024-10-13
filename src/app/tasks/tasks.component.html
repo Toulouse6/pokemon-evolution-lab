@@ -1,9 +1,11 @@
 <div id="tasks" [ngClass]="{ 'fully-evolved-tasks': pokemon.isFullyEvolved }">
     <header>
+        <!-- Pokémon Image -->
         <div class="pokemonImage">
-            <app-spinner *ngIf="isLoading"></app-spinner>
-            <img *ngIf="!isLoading" [src]="pokemon.gif" (load)="onPokemonImageLoad()" alt="{{ pokemon.name }}'s gif">
+            <img class="pokemonImage" [src]="pokemon.gif" alt="{{ pokemon.name }}'s gif">
         </div>
+
+        <!-- Pokémon Name & Stage -->
         <div class="pokemonInfo">
             <h2>{{ pokemon.name }}
                 <span class="stage">{{ getCurrentEvolutionStage(pokemon) }}</span>

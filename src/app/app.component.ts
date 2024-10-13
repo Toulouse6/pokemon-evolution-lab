@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AudioService } from './Services/audio.service';
 import { Pokemon } from './Models/pokemon.model';
 import { PokemonService } from './Services/pokemon.service';
+import { PokemonTaskService } from './Services/pokemon.task.service';
 
 @Component({
     selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
 
     // Constructor
     constructor(
+        private pokemonTaskService: PokemonTaskService,
         private pokemonService: PokemonService,
         public audioService: AudioService,
         private cdr: ChangeDetectorRef,

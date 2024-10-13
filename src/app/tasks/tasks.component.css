@@ -37,30 +37,17 @@ header {
     box-sizing: border-box;
 }
 
-
 header .pokemonImage {
-    max-width: 190px; 
-    min-width: 190px; 
-    height: auto; 
-    overflow: visible;  
+    max-width: 190px;
+    max-height: 190px;
+    min-width: 190px;
+    min-height: 190px;
     margin: 0 25px 0 0;
     padding-left: 5px;
-    display: flex;  
-    justify-content: center; 
-    align-items: center; 
 }
 
 
-header .pokemonImage img {
-    width: 100%; 
-    height: auto;  
-    max-height: 190px;  
-}
-
-
-.pokemonImage {
-    position: relative; 
-}
+/* Pokemon Gif */
 
 
 h2 {
