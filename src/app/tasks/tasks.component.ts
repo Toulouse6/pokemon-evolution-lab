@@ -7,11 +7,13 @@ import { PokemonTaskService } from '../Services/pokemon.task.service';
 import { AudioService } from '../Services/audio.service';
 import { PokemonEvolutionService } from '../Services/pokemon.evolution.service';
 import { PokemonService } from '../Services/pokemon.service';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
+
 
 @Component({
     selector: 'app-tasks',
     standalone: true,
-    imports: [TaskComponent, NgFor, NgIf, NgClass],
+    imports: [TaskComponent, NgFor, NgIf, NgClass, SpinnerComponent], // Add SpinnerComponent here
     templateUrl: './tasks.component.html',
     styleUrls: ['./tasks.component.css']
 })
@@ -24,6 +26,7 @@ export class TasksComponent implements OnInit, OnChanges {
     displayDefense: number = 0;
 
     isLoading: boolean = false;
+    spinnerImage: string = './assets/images/evolution-gif2.gif'; 
 
     // Constructor
     constructor(
@@ -39,8 +42,10 @@ export class TasksComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.loadPokemonState();
         this.checkConditions();
-        this.isLoading = false;
-
+        
+        if (!this.pokemon.gif) {
+            this.pokemon.gif = this.spinnerImage; 
+        }
 
         // Call animateStats
         this.pokemonEvolutionService.animateStats(
@@ -62,7 +67,10 @@ export class TasksComponent implements OnInit, OnChanges {
     // ngOnChanges
     ngOnChanges(changes: SimpleChanges) {
         if (changes['pokemon'] && !changes['pokemon'].firstChange) {
-            this.isLoading = true;
+  
+            if (!this.pokemon.gif) {
+                this.pokemon.gif = this.spinnerImage; 
+            }
 
             this.loadPokemonState();
             this.checkConditions();
@@ -89,8 +97,7 @@ export class TasksComponent implements OnInit, OnChanges {
 
 
     onPokemonImageLoad() {
-        this.isLoading = false;  
-        console.log('Pokémon GIF loaded.');
+        this.isLoading = false;
     }
 
 
