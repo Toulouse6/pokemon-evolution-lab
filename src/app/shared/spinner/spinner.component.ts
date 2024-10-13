@@ -8,9 +8,6 @@ import { Component } from '@angular/core';
 })
 
 export class SpinnerComponent {
-    isLoading: boolean = true;
 
-    toggleLoading() {
-        this.isLoading = !this.isLoading;
-    }
+
 }

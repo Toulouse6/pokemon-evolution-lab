@@ -9,16 +9,14 @@ import { PokemonEvolutionService } from '../Services/pokemon.evolution.service';
 import { PokemonService } from '../Services/pokemon.service';
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 
-
 @Component({
     selector: 'app-tasks',
     standalone: true,
-    imports: [TaskComponent, NgFor, NgIf, NgClass, SpinnerComponent], // Add SpinnerComponent here
+    imports: [TaskComponent, NgFor, NgIf, NgClass, SpinnerComponent],
     templateUrl: './tasks.component.html',
     styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit, OnChanges {
-
     @Input({ required: true }) pokemon!: Pokemon;
 
     message: string = '';
@@ -26,7 +24,6 @@ export class TasksComponent implements OnInit, OnChanges {
     displayDefense: number = 0;
 
     isLoading: boolean = false;
-    spinnerImage: string = './assets/images/evolution-gif2.gif'; 
 
     // Constructor
     constructor(
@@ -35,19 +32,44 @@ export class TasksComponent implements OnInit, OnChanges {
         private pokemonEvolutionService: PokemonEvolutionService,
         private audioService: AudioService,
         private cdr: ChangeDetectorRef
-    ) { }
-
+    ) {}
 
     // ngOnInit
     ngOnInit() {
         this.loadPokemonState();
         this.checkConditions();
-        
-        if (!this.pokemon.gif) {
-            this.pokemon.gif = this.spinnerImage; 
-        }
+        this.animateStats();
 
-        // Call animateStats
+        this.isLoading = true;  
+
+
+        setTimeout(() => {
+            this.isLoading = false;   
+            this.cdr.detectChanges(); 
+        }, 500);   
+    }
+
+    // ngOnChanges
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['pokemon'] && !changes['pokemon'].firstChange) {
+  
+            this.isLoading = true;  
+
+
+            setTimeout(() => {
+                this.isLoading = false;   
+                this.cdr.detectChanges(); 
+            }, 500);   
+
+            this.loadPokemonState(); 
+            this.checkConditions(); 
+            this.audioService.playSoundEffect('sword-sound.mp3');
+        }
+    }
+
+
+    // Animate stats
+    animateStats() {
         this.pokemonEvolutionService.animateStats(
             'attack',
             this.pokemon.attack,
@@ -64,45 +86,69 @@ export class TasksComponent implements OnInit, OnChanges {
         );
     }
 
-    // ngOnChanges
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes['pokemon'] && !changes['pokemon'].firstChange) {
-  
-            if (!this.pokemon.gif) {
-                this.pokemon.gif = this.spinnerImage; 
-            }
+    // Handle image load event
+    onPokemonImageLoad() {
+        console.log('Pokemon image loaded:', this.pokemon.gif);
+        this.isLoading = false;  
+        this.cdr.detectChanges(); 
+    }
 
-            this.loadPokemonState();
-            this.checkConditions();
-            this.audioService.playSoundEffect('sword-sound.mp3');
-            this.cdr.detectChanges();
-
-            // Pokémon change animate stats
-            this.pokemonEvolutionService.animateStats(
-                'attack',
-                this.pokemon.attack,
-                2000,
-                0,
-                value => this.displayAttack = value
-            );
-            this.pokemonEvolutionService.animateStats(
-                'defense',
-                this.pokemon.defense,
-                2000,
-                0,
-                value => this.displayDefense = value
-            );
+    // Load Pokemon State
+    loadPokemonState() {
+ const updatedPokemon = this.pokemonService.loadPokemonState(this.pokemon.id);
+       
+        if (updatedPokemon) {
+            this.pokemon = { ...updatedPokemon };
         }
     }
 
 
-    onPokemonImageLoad() {
-        this.isLoading = false;
+    // Evolve Pokemon
+    evolvePokemon(): void {
+
+        this.pokemonEvolutionService.evolvePokemon(this.pokemon,
+            (newAttack) => {
+                this.displayAttack = newAttack;
+                this.cdr.detectChanges(); 
+            },
+            (newDefense) => {
+                this.displayDefense = newDefense;
+                this.isLoading = false;  
+                this.cdr.detectChanges();  
+            }
+        );
     }
 
+    onTaskCompleted(): void {
+        this.setEvolutionMessage();
+        this.loadPokemonState(); 
+        this.cdr.detectChanges();
+    }
 
-    // Get evolution stage
-    public getCurrentEvolutionStage(pokemon: Pokemon): string {
+    trackByTaskId(index: number, task: Task): string {
+        return task.id;
+    }
+
+    showEvolutionHint(): boolean {
+        return !!this.message;
+    }
+
+    setEvolutionMessage() {
+        this.message = this.pokemonEvolutionService.setEvolutionMessage(this.pokemon, this.selectedPokemonTasks);
+    }
+
+    private checkConditions() {
+        this.pokemonService.checkAndUpdatePokemon(this.pokemon.id);
+        this.loadPokemonState();  
+    }
+
+    get selectedPokemonTasks(): Task[] {
+        const currentStageString = this.getCurrentEvolutionStage(this.pokemon);
+        const currentStage = parseInt(currentStageString.split('/')[0], 10);
+        return this.pokemonTasksService.getSelectedPokemonTasks(this.pokemon.id, currentStage);
+    }
+
+    getCurrentEvolutionStage(pokemon: Pokemon): string {
         let stage = 1;
         let totalStages = 1;
 
@@ -124,117 +170,28 @@ export class TasksComponent implements OnInit, OnChanges {
     }
 
 
-    // Load Pokemon State
-    loadPokemonState() {
-        this.isLoading = true;
-
-        const updatedPokemon = this.pokemonService.loadPokemonState(this.pokemon.id);
-        if (updatedPokemon) {
-            this.pokemon = { ...updatedPokemon };
-
-            // Animate stats
-            this.pokemonEvolutionService.animateStats(
-                'attack',
-                this.pokemon.attack,
-                2000,
-                this.displayAttack,
-                value => this.displayAttack = value
-            );
-
-            this.pokemonEvolutionService.animateStats(
-                'defense',
-                this.pokemon.defense,
-                2000,
-                this.displayDefense,
-                value => this.displayDefense = value
-            );
-
-            this.setEvolutionMessage();
-        }
-
-        this.isLoading = false;
-
-    }
-
-
-    // Evolve Pokemon
-    evolvePokemon(): void {
-        this.pokemonEvolutionService.evolvePokemon(this.pokemon,
-            (newAttack) => this.displayAttack = newAttack,
-            (newDefense) => this.displayDefense = newDefense
-        );
-        this.cdr.detectChanges();
-    }
-
-
-    // On Task Completed
-    onTaskCompleted(): void {
-        this.pokemonService.isLoading = true;
-        this.loadPokemonState();
-        this.setEvolutionMessage();
-        this.pokemonService.isLoading = false;
-        this.cdr.detectChanges();
-    }
-
-
-    // Track By Task Id
-    trackByTaskId(index: number, task: Task): string {
-        return task.id;
-    }
-
-    // Show evolution hint message
-    showEvolutionHint(): boolean {
-        return !!this.message;
-    }
-
-
-    // Set Evolution Message
-    setEvolutionMessage() {
-        this.message = this.pokemonEvolutionService.setEvolutionMessage(this.pokemon, this.selectedPokemonTasks);
-    }
-
-
-    // Check conditions (evolution, task completion)
-    private checkConditions() {
-        this.pokemonService.checkAndUpdatePokemon(this.pokemon.id);
-        this.loadPokemonState();
-    }
-
-
-    // Selected Pokemon Tasks
-    get selectedPokemonTasks(): Task[] {
-        const currentStageString = this.getCurrentEvolutionStage(this.pokemon);
-        const currentStage = parseInt(currentStageString.split('/')[0], 10); // Extract the current stage as a number
-        return this.pokemonTasksService.getSelectedPokemonTasks(this.pokemon.id, currentStage);
-    }
-
-
-    // Action Buttons
-
     feed(soundFile: string): void {
         this.pokemonService.feedPokemon(this.pokemon.id, soundFile);
-        this.loadPokemonState();
+        this.loadPokemonState(); 
         this.checkConditions();
         this.setEvolutionMessage();
     }
 
     moonStone(soundFile: string): void {
         this.pokemonService.useMoonStone(this.pokemon.id, soundFile);
-        this.loadPokemonState();
+        this.loadPokemonState(); 
         this.checkConditions();
         this.setEvolutionMessage();
     }
 
     potion(soundFile: string): void {
         this.pokemonService.usePotion(this.pokemon.id, soundFile);
-        this.loadPokemonState();
+        this.loadPokemonState(); 
         this.checkConditions();
         this.setEvolutionMessage();
     }
 
-    // Disable Action buttons
     areActionsDisabled(): boolean {
         return this.pokemon.health === 2500 && this.pokemon.happiness === 2500;
     }
-
 }

@@ -2,8 +2,7 @@
     <header>
         <div class="pokemonImage">
             <app-spinner *ngIf="isLoading"></app-spinner>
-            <img *ngIf="!isLoading && pokemon.gif" [src]="pokemon.gif" (load)="onPokemonImageLoad()"
-                alt="{{ pokemon.name }}'s gif">
+            <img *ngIf="!isLoading" [src]="pokemon.gif" (load)="onPokemonImageLoad()" alt="{{ pokemon.name }}'s gif">
         </div>
         <div class="pokemonInfo">
             <h2>{{ pokemon.name }}
