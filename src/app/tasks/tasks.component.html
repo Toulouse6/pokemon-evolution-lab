@@ -2,12 +2,10 @@
     <header>
 
         <div class="pokemonImage">
+            <img *ngIf="isLoading" src="./assets/images/evolution-gif2.gif" alt="Loading..." class="loading-gif">
 
-            <div class="pokemonImage">
-                <img *ngIf="isLoading" src="./assets/images/evolution-gif2.gif" alt="Loading..." class="loading-gif">
-                <img *ngIf="!isLoading && pokemon.gif" class="pokemonImage" [src]="pokemon.gif"
-                    alt="{{ pokemon.name }}'s gif">
-            </div>
+            <img *ngIf="!isLoading && pokemon.gif" class="pokemonImage" [src]="pokemon.gif"
+                (load)="onPokemonImageLoad()" alt="{{ pokemon.name }}'s gif">
         </div>
 
         <div class="pokemonInfo">

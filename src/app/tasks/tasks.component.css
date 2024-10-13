@@ -37,11 +37,10 @@ header {
     box-sizing: border-box;
 }
 
-/* Loading */
 
 .loading-gif {
     position: absolute;
-    top: 45%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;

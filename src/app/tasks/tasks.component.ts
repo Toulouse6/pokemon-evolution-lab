@@ -23,7 +23,7 @@ export class TasksComponent implements OnInit, OnChanges {
     displayAttack: number = 0;
     displayDefense: number = 0;
 
-    isLoading: boolean = false; 
+    isLoading: boolean = false;
 
     // Constructor
     constructor(
@@ -32,14 +32,15 @@ export class TasksComponent implements OnInit, OnChanges {
         private pokemonEvolutionService: PokemonEvolutionService,
         private audioService: AudioService,
         private cdr: ChangeDetectorRef
-    ) {}
+    ) { }
 
 
     // ngOnInit
     ngOnInit() {
         this.loadPokemonState();
         this.checkConditions();
-        this.isLoading = false; 
+        this.isLoading = false;
+
 
         // Call animateStats
         this.pokemonEvolutionService.animateStats(
@@ -61,12 +62,14 @@ export class TasksComponent implements OnInit, OnChanges {
     // ngOnChanges
     ngOnChanges(changes: SimpleChanges) {
         if (changes['pokemon'] && !changes['pokemon'].firstChange) {
+            this.isLoading = true;
+
             this.loadPokemonState();
             this.checkConditions();
             this.audioService.playSoundEffect('sword-sound.mp3');
             this.cdr.detectChanges();
 
-            //  Pokémon change animate stats
+            // Pokémon change animate stats
             this.pokemonEvolutionService.animateStats(
                 'attack',
                 this.pokemon.attack,
@@ -82,6 +85,12 @@ export class TasksComponent implements OnInit, OnChanges {
                 value => this.displayDefense = value
             );
         }
+    }
+
+
+    onPokemonImageLoad() {
+        this.isLoading = false;
+        console.log('Pokémon GIF loaded.');
     }
 
 
@@ -110,8 +119,7 @@ export class TasksComponent implements OnInit, OnChanges {
 
     // Load Pokemon State
     loadPokemonState() {
-
-        this.isLoading = true; 
+        this.isLoading = true;
 
         const updatedPokemon = this.pokemonService.loadPokemonState(this.pokemon.id);
         if (updatedPokemon) {
@@ -125,6 +133,7 @@ export class TasksComponent implements OnInit, OnChanges {
                 this.displayAttack,
                 value => this.displayAttack = value
             );
+
             this.pokemonEvolutionService.animateStats(
                 'defense',
                 this.pokemon.defense,
@@ -135,7 +144,9 @@ export class TasksComponent implements OnInit, OnChanges {
 
             this.setEvolutionMessage();
         }
-        this.isLoading = false; 
+
+        this.isLoading = false;
+
     }
 
 
@@ -154,7 +165,7 @@ export class TasksComponent implements OnInit, OnChanges {
         this.pokemonService.isLoading = true;
         this.loadPokemonState();
         this.setEvolutionMessage();
-        this.pokemonService.isLoading = false; 
+        this.pokemonService.isLoading = false;
         this.cdr.detectChanges();
     }
 
