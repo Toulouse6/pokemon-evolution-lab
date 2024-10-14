@@ -37,8 +37,32 @@ export class AppComponent implements OnInit {
     // OnInit
     ngOnInit(): void {
         this.loadSavedState();
+        this.preloadGifs(); 
     }
 
+    // Preload Gifs
+
+    preloadGifs(): void {
+        const preloadLinks = this.getGifLinks();
+        const head = document.head;
+
+        preloadLinks.forEach(gif => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = gif;  
+            link.as = 'image';
+            head.appendChild(link);
+        });
+    }
+
+    getGifLinks(): string[] {
+        return this.pokemons.flatMap(pokemon => [
+            pokemon.gif,
+            pokemon.secondGif,
+            pokemon.thirdGif,
+            // Filter out undefined & empty strings
+        ]).filter((gif): gif is string => typeof gif === 'string' && gif.length > 0); 
+    }
 
     // Load saved state
     loadSavedState(): void {
@@ -148,10 +172,10 @@ export class AppComponent implements OnInit {
 
     toggleMusic(): void {
         if (this.audioService.isPlaying()) {
-          this.audioService.pause();
+            this.audioService.pause();
         } else {
-          this.audioService.playMusic();
+            this.audioService.playMusic();
         }
-      }
+    }
 
 }
