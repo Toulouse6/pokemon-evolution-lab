@@ -214,7 +214,7 @@ export class PokemonService {
                 hasEvolved = true;
 
                 // Evolution sound
-                this.audioService.taskCompleteEffect('evolution2.mp3');
+                this.audioService.taskCompleteEffect('evolution4.mp3');
                 pokemon.evolutionSoundPlayed = true;
 
 
@@ -245,7 +245,7 @@ export class PokemonService {
 
                 // Reset the evolution sound state
                 pokemon.evolutionSoundPlayed = false;
-                this.audioService.taskCompleteEffect('evolution2.mp3');
+                this.audioService.taskCompleteEffect('evolution4.mp3');
 
                 // Save Pokémon state
                 this.savePokemons();

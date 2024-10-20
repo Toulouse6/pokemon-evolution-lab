@@ -94,7 +94,7 @@ export class PokemonTaskService {
                     pokemon.message = pokemon.message ?? pokemon.message;
 
                     // Play evolution sound
-                    this.audioService.taskCompleteEffect('evolution2.mp3');
+                    this.audioService.taskCompleteEffect('evolution4.mp3');
                     pokemon.evolutionSoundPlayed = true;
 
                     // Clear message after evolution
@@ -120,7 +120,7 @@ export class PokemonTaskService {
                     pokemon.defense = pokemon.thirdDefense ?? pokemon.defense;
 
                     // Play evolution sound
-                    this.audioService.taskCompleteEffect('evolution2.mp3');
+                    this.audioService.taskCompleteEffect('evolution4.mp3');
                     pokemon.evolutionSoundPlayed = false; // Reset evolution sound state
 
                     // Clear message after evolution
