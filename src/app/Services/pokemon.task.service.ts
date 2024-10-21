@@ -135,7 +135,7 @@ export class PokemonTaskService {
                 if (health === 2500 && happiness === 2500 && tasks.length === 0) {
 
                     pokemon.isFullyEvolved = true; // Mark as fully evolved
-                    this.audioService.playSoundEffect('magic-mallet.mp3');
+                    this.audioService.playSoundEffect('rock-spell.mp3');
                 } else {
                     pokemon.isFullyEvolved = false;
                 }

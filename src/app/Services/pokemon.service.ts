@@ -256,7 +256,7 @@ export class PokemonService {
             if (health === 2500 && happiness === 2500 && tasks.length === 0) {
                 pokemon.isFullyEvolved = true;
                 pokemon.finalBackground = pokemon.finalBackground;
-                this.audioService.playSoundEffect('magic-mallet.mp3');
+                this.audioService.playSoundEffect('rock-spell.mp3');
             } else {
                 pokemon.isFullyEvolved = false;
             }
