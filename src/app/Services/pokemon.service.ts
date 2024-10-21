@@ -217,7 +217,6 @@ export class PokemonService {
                 this.audioService.taskCompleteEffect('evolution4.mp3');
                 pokemon.evolutionSoundPlayed = true;
 
-
                 // Save Pokémon state
                 this.savePokemons();
                 this.saveSelectedPokemonState(pokemon);

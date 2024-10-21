@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class AudioService {
 
     // background Music
-    private backgroundAudio = new Audio('./assets/audio/pokemon-lab-theme.mp3');
+    private backgroundAudio = new Audio('./assets/audio/pokemon-app.mp3');
 
     playMusic(): void {
         try {

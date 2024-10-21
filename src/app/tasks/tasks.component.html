@@ -1,7 +1,8 @@
 <!-- Fully Evolved Background -->
 <div id="tasks" [ngClass]="{ 'fully-evolved-tasks': pokemon.isFullyEvolved }" [ngStyle]="{
        'background-image': pokemon.isFullyEvolved ? 'linear-gradient(to bottom, rgba(43, 63, 86, 0.8) 5vh, rgba(30, 48, 64, 1) 30vh), url(' + pokemon.finalBackground + ')' : 'linear-gradient(to bottom, rgba(43, 63, 86, 0.8) 5vh, rgba(30, 48, 64, 1) 30vh)',
-       'background-size': pokemon.isFullyEvolved ? '120%' : 'none'
+       'background-size': pokemon.isFullyEvolved ? '120%' : 'none',
+       'background-repeat': 'no-repeat'
      }">
 
     <header>
