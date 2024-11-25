@@ -1,0 +1,88 @@
+<!-- Fully Evolved Background -->
+<div id="tasks" [ngClass]="{ 'fully-evolved-tasks': pokemon.isFullyEvolved }" [ngStyle]="{
+       'background-image': pokemon.isFullyEvolved ? 'linear-gradient(to bottom, rgba(43, 63, 86, 0.8) 5vh, rgba(30, 48, 64, 1) 30vh), url(' + pokemon.finalBackground + ')' : 'linear-gradient(to bottom, rgba(43, 63, 86, 0.8) 5vh, rgba(30, 48, 64, 1) 30vh)',
+       'background-size': pokemon.isFullyEvolved ? '120%' : 'none',
+       'background-repeat': 'no-repeat'
+     }">
+
+    <header>
+        <!-- Pokémon Image -->
+        <div class="pokemonImage">
+            <img class="pokemonImage" [src]="pokemon.gif" alt="{{ pokemon.name }}'s gif">
+        </div>
+
+        <!-- Pokémon Name & Stage -->
+        <div class="pokemonInfo">
+            <h2>{{ pokemon.name }}
+                <span class="stage">{{ getCurrentEvolutionStage(pokemon) }}</span>
+            </h2>
+
+            <!-- Actions (Feed, Potion, Moon Stone) -->
+            <div class="actions">
+
+                <!-- Feed Button -->
+                <button (click)="feed('button2.mp3')" class="tooltip" [disabled]="areActionsDisabled()"
+                    [ngClass]="{ 'inactive-button': areActionsDisabled() }">
+                    <img src="./assets/images/berries2.png" alt="Feed" class="action-icon">
+                    <span class="tooltipText">Feed</span>
+                </button>
+
+                <!-- Potion Button -->
+                <button (click)="potion('button2.mp3')" class="tooltip" [disabled]="areActionsDisabled()"
+                    [ngClass]="{ 'inactive-button': areActionsDisabled() }">
+                    <img src="./assets/images/potion1.png" alt="Potion" class="action-icon">
+                    <span class="tooltipText">Potion</span>
+                </button>
+
+                <!-- Moon Stone Button -->
+                <button (click)="moonStone('button2.mp3')" class="tooltip" [disabled]="areActionsDisabled()"
+                    [ngClass]="{ 'inactive-button': areActionsDisabled() }">
+                    <img src="./assets/images/moonstone.png" alt="Moon Stone" class="action-icon">
+                    <span class="tooltipText">Moon Stone</span>
+                </button>
+            </div>
+
+            <!-- Health and Happiness Stats -->
+            <div class="healthHappiness">
+                <p class="status">Happiness: {{ pokemon.happiness || 50 }}</p>
+                <p class="status">Health: {{ pokemon.health || 50 }}</p>
+            </div>
+            <div *ngIf="showEvolutionHint()" class="evolution-message">
+                <p [innerHTML]="message"></p>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="pokemonStats">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ displayAttack }}</th>
+                    <th>
+                        <img [src]="pokemon.energy" alt="{{pokemon.name}} energy" class="energy-icon">
+                    </th>
+                    <th>{{ displayDefense }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Attack</td>
+                    <td>Energy</td>
+                    <td>Defense</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li *ngFor="let task of selectedPokemonTasks; trackBy: trackByTaskId">
+            <app-task [task]="task" [pokemon]="pokemon" (taskCompleted)="onTaskCompleted()">
+            </app-task>
+        </li>
+    </ul>
+
+</div>
+
+<div>
+</div>
