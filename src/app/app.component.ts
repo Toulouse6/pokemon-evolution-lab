@@ -17,7 +17,7 @@ import { PokemonService } from './Services/pokemon.service';
 })
 
 export class AppComponent implements OnInit {
-    
+
     @Input({ required: true }) pokemon!: Pokemon;
 
     pokemons: Pokemon[] = [];
@@ -35,7 +35,9 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.loadSavedState();
         this.preloadGifs();
+        this.preloadAvatars();
     }
+
 
     // Pre load Gifs
     preloadGifs(): void {
@@ -51,6 +53,7 @@ export class AppComponent implements OnInit {
         });
     }
 
+    // Get Gif Links
     getGifLinks(): string[] {
         return this.pokemons.flatMap(pokemon => [
             pokemon.gif,
@@ -58,6 +61,31 @@ export class AppComponent implements OnInit {
             pokemon.thirdGif,
         ]).filter((gif): gif is string => typeof gif === 'string' && gif.length > 0);
     }
+
+
+    // Pre load Avatars
+    preloadAvatars(): void {
+        const preloadLinks = this.getAvatarLinks();
+        const head = document.head;
+
+        preloadLinks.forEach(avatar => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.href = avatar;
+            link.as = 'image';
+            head.appendChild(link);
+        });
+    }
+
+    // Get Avatar Links
+    getAvatarLinks(): string[] {
+        return this.pokemons.flatMap(pokemon => [
+            pokemon.avatar,
+            pokemon.secondAvatar,
+            pokemon.thirdAvatar,
+        ]).filter((avatar): avatar is string => typeof avatar === 'string' && avatar.length > 0);
+    }
+
 
     // Load states
     loadSavedState(): void {
