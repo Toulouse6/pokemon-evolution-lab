@@ -1,11 +1,6 @@
 ## Pokémon Evolution Lab
 
-| Text Content                                                                                       | Image                                                                                             |
-|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-
-
------------|
-| Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.      | ![Pokemon Lab Screenshot](./src/assets/pokemon-lab-screen.png)                                   |
+Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.
 
 ## Features
 
@@ -35,3 +30,5 @@
 
 
 Author: Tal Argaman.
+
+<img src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="500">
