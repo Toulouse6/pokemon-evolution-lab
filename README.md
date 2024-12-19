@@ -11,11 +11,11 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 **Features:**
 
-- **Learning Task**: Track and complete learning tasks for each Pokémon stage, focusing on their skills, behaviors, and care routines.
+- **Learning Tasks**: Track & complete learning tasks for each Pokémon stage, focusing on their skills, behaviors and care routines.
 
-- **Three-Stage Task System**: Each Pokémon has three sets of learning tasks—one for each evolution stage. Complete all tasks to unlock their full potential.
+- **Three-Stage Task System**: Each Pokémon has three sets of learning tasks — one for each evolution stage. Complete all tasks to unlock their full potential.
 
-- **Health and Happiness System**: Keep an eye on your Pokémon's health & happiness. Their evolution depends on achieving key milestones while completing tasks.
+- **Health & Happiness System**: Keep an eye on your Pokémon's health & happiness. Their evolution depends on achieving key milestones while completing tasks.
 
 **Pokémon Evolution:**
 
