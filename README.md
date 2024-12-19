@@ -6,7 +6,7 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 ---
 
-### Features
+### Features:
 
 - **Learning Task**: Track and complete learning tasks for each Pokémon stage, focusing on their skills, behaviors, and care routines.
 
@@ -24,11 +24,13 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 ---
 
-### Technologies Used
+### Technologies:
 
 - **Angular17**
 - **TypeScript**
 - **CSS3**
 - **HTML5**
 
-**Author: Tal Argaman**
+---
+
+**Author:** Tal Argaman
