@@ -1,6 +1,6 @@
 ## Pokémon Evolution Lab
 
-<img align="right" src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="400">
+<img align="right" src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="350">
 
 Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.
 
@@ -10,19 +10,22 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 - **Three-Stage Task System**: Each Pokémon has three sets of learning tasks—one for each evolution stage. Complete all tasks to unlock their full potential.
 
-- **Health and Happiness System**: Keep an eye on your Pokémon's health and happiness. Their evolution depends on achieving key milestones while completing tasks.
+- **Health and Happiness System**: Keep an eye on your Pokémon's health & happiness. Their evolution depends on achieving key milestones while completing tasks.
 
 - **Pokémon Evolution**:
 
-  - **Second Evolution**: Evolution occurs once all learning tasks are completed, and the Pokémon's health and happiness exceed 1000.
-  - **Third Evolution**: Evolution occurs once all second stage learning tasks are completed and the Pokémon's health and happiness exceed 2000.
+- **First Evolution**: Occurs once all learning tasks are completed, and Pokémon's health & happiness exceed 1000.
+  
+- **Second Evolution**: Occurs once all second stage learning tasks are completed and Pokémon's health & happiness exceed 2000.
+
+- **Full Potential:** A Pokémon reaches its full potential once all third-stage learning tasks are completed and its health & happiness hit 2500.
 
 ### Technologies Used
 
-- **Angular**
+- **Angular17**
 - **TypeScript**
-- **CSS**
-- **HTML**
+- **CSS3**
+- **HTML5**
 
 ---
 
