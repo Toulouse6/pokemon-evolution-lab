@@ -1,40 +1,40 @@
-<div style="display: flex; align-items: center;">
+<div style="display: flex; align-items: flex-start; gap: 2rem;">
 
-<div style="flex: 1;">
+  <div style="flex: 2; max-width: 60%;">
   
-## Pokémon Evolution Lab
+  ## Pokémon Evolution Lab
 
-Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.
+  Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.
 
-## Features
+  ## Features
 
-- **Learning Task**: Track and complete learning tasks for each Pokémon stage, focusing on their skills, behaviors, and care routines.
+  - **Learning Task**: Track and complete learning tasks for each Pokémon stage, focusing on their skills, behaviors, and care routines.
 
-- **Three-Stage Task System**: Each Pokémon has three sets of learning tasks—one for each evolution stage. Complete all tasks to unlock their full potential.
+  - **Three-Stage Task System**: Each Pokémon has three sets of learning tasks—one for each evolution stage. Complete all tasks to unlock their full potential.
 
-- **Health and Happiness System**: Keep an eye on your Pokémon's health and happiness. Their evolution depends on achieving key milestones while completing tasks.
+  - **Health and Happiness System**: Keep an eye on your Pokémon's health and happiness. Their evolution depends on achieving key milestones while completing tasks.
 
-- **Pokémon Evolution**:
+  - **Pokémon Evolution**:
 
-  - **Second Evolution**: Evolution occurs once all learning tasks are completed, and the Pokémon's health and happiness exceed 1000.
-  
-  - **Third Evolution**: Evolution occurs once all second stage learning tasks are completed and the Pokémon's health and happiness exceed 2000. 
+    - **Second Evolution**: Evolution occurs once all learning tasks are completed, and the Pokémon's health and happiness exceed 1000.
+    
+    - **Third Evolution**: Evolution occurs once all second stage learning tasks are completed and the Pokémon's health and happiness exceed 2000. 
 
-- **Responsive Design**
+  - **Responsive Design**
 
-## Technologies Used
+  ## Technologies Used
 
-- **Angular**
-- **TypeScript**
-- **CSS**
-- **HTML**
+  - **Angular**
+  - **TypeScript**
+  - **CSS**
+  - **HTML**
 
-Author: Tal Argaman.
+  Author: Tal Argaman.
 
-</div>
+  </div>
 
-<div style="flex: 1; text-align: center;">
-  <img src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="500">
-</div>
+  <div style="flex: 1; text-align: center;">
+    <img src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" style="max-width: 100%; border-radius: 10px;">
+  </div>
 
 </div>
