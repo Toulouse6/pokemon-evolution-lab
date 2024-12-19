@@ -12,7 +12,7 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 - **Health and Happiness System**: Keep an eye on your Pokémon's health & happiness. Their evolution depends on achieving key milestones while completing tasks.
 
-- **Pokémon Evolution**:
+### Pokémon Evolution
 
 - **First Evolution**: Occurs once all learning tasks are completed, and Pokémon's health & happiness exceed 1000.
   
