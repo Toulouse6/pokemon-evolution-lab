@@ -31,4 +31,4 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 Author: Tal Argaman.
 
-![Exodia Screenshot](.src/assets/pokemon-lab-screen.png)
+![Pokemon Lab Screenshot](.src/assets/pokemon-lab-screen.png)
