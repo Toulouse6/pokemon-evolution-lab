@@ -16,9 +16,9 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 
 - **First Evolution**: Occurs once all learning tasks are completed, and Pokémon's health & happiness exceed 1000.
   
-- **Second Evolution**: Occurs once all second stage learning tasks are completed and Pokémon's health & happiness exceed 2000.
+- **Second Evolution**: Occurs once all second-stage learning tasks are completed and Pokémon's health & happiness exceed 2000.
 
-- **Full Potential:** A Pokémon reaches its full potential once all third-stage learning tasks are completed and its health & happiness hit 2500.
+- **Full Potential:** Occurs once all third-stage learning tasks are completed and its health & happiness hit 2500.
 
 ### Technologies Used
 
