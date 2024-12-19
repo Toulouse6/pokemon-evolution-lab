@@ -1,3 +1,7 @@
+<div style="display: flex; align-items: center;">
+
+<div style="flex: 1;">
+  
 ## Pokémon Evolution Lab
 
 Pokémon Evolution Lab is an Angular web app where you can care for and level up your Pokémon.
@@ -16,10 +20,7 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
   
   - **Third Evolution**: Evolution occurs once all second stage learning tasks are completed and the Pokémon's health and happiness exceed 2000. 
 
-  
-  
 - **Responsive Design**
-
 
 ## Technologies Used
 
@@ -28,8 +29,12 @@ Pokémon Evolution Lab is an Angular web app where you can care for and level up
 - **CSS**
 - **HTML**
 
-
 Author: Tal Argaman.
 
-<img src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="600">
+</div>
 
+<div style="flex: 1; text-align: center;">
+  <img src="./src/assets/pokemon-lab-screen.png" alt="Pokemon Lab Screenshot" width="500">
+</div>
+
+</div>
